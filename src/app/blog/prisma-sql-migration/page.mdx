@@ -1,0 +1,57 @@
+export { metadata } from './config'
+
+import Script from 'next/script'
+import { config, script } from './config'
+
+<Script
+id={`blog-post-${config.slug}-schema`}
+type='application/ld+json'
+strategy='beforeInteractive'
+dangerouslySetInnerHTML={{ __html: JSON.stringify(script) }}
+/>
+
+# Generate SQL Migration Scripts with Prisma
+
+Learn how to create SQL migration scripts using Prisma by pulling database schemas and generating diff scripts between different schema states.
+
+**Create a new Prisma schema file:**
+
+- Inside the `prisma` folder, create a new file named `supabase_schema.prisma`.
+
+**Copy and paste the following into the file:**
+
+```sql
+filename=schema.prisma
+generator client {
+	provider = "prisma-client-js"
+}
+
+datasource db {
+	provider = "postgresql"
+	url      = env("DATABASE_URL")
+}
+```
+
+**Pull the latest database schema:**
+
+- Open your terminal and run:
+  ```bash
+  npx prisma db pull --schema prisma/supabase_schema.prisma
+  ```
+
+> _This command will sync your Prisma schema with the current state of your database._
+
+**Generate the migration script:**
+
+- Next, run the following command:
+  ```bash
+  npx prisma migrate diff --from-schema-datamodel prisma/supabase_schema.prisma --to-schema-datamodel prisma/schema.prisma --script
+  ```
+
+> _This will compare `supabase_schema.prisma` (latest database state in supabase) with `schema.prisma` (your local schema with your changes you've made) and generate a migration script with the differences._
+
+
+
+
+
+
