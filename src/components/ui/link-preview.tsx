@@ -48,7 +48,7 @@ function usePreviewSource(
 			'viewport.height': height * 2.5,
 		})
 		return `https://api.microlink.io/?${params}`
-	}, [isStatic, staticImageSrc, url, width, height, quality]) // Recalculate only if these change.
+	}, [isStatic, staticImageSrc, url, width, height]) // Recalculate only if these change.
 }
 
 // This hook handles the hover card's open state and the subtle mouse-following effect for the card itself.
@@ -194,8 +194,11 @@ export const HoverPeek: React.FC<HoverPeekProps> = ({
 	// Prepare the trigger element. We use React.cloneElement to pass down props (like className and mouse handlers)
 	// correctly, especially when the child might already have its own className.
 	const triggerChild = isValidElement(children) ? (
-		cloneElement(children as React.ReactElement<any>, {
-			className: cn((children.props as any).className, className), // Merge classes nicely.
+		cloneElement(children as React.ReactElement<Record<string, unknown>>, {
+			className: cn(
+				(children.props as { className?: string }).className,
+				className
+			), // Merge classes nicely.
 			onPointerMove: handlePointerMove, // Attach the card's follow handler.
 		})
 	) : (

@@ -81,11 +81,11 @@ export const Footer: React.FC = () => {
 			<div className='flex items-center justify-between'>
 				<AnimatedTextCycle
 					words={[
-						<span>
+						<span key='copyright'>
 							© {new Date().getFullYear()} {siteConfig.title}. All rights
 							reserved.
 						</span>,
-						<span>Built with Next.js 15 and Shadcn UI.</span>,
+						<span key='built-with'>Built with Next.js 15 and Shadcn UI.</span>,
 					]}
 					className='text-xs text-zinc-500'
 				/>

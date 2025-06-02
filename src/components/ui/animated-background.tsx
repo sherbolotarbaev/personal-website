@@ -49,7 +49,7 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
 		}
 	}, [defaultValue])
 
-	return Children.map(children, (child: any, index) => {
+	return Children.map(children, (child: ReactElement<any>, index) => {
 		const id = child.props['data-id']
 
 		const interactionProps = enableHover

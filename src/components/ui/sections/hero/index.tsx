@@ -12,9 +12,9 @@ const Hero: React.FC = () => {
 		<SectionWrapper>
 			<div className='flex-1'>
 				<p className='text-zinc-600 dark:text-zinc-300'>
-					I'm a software engineer 🇰🇬, problem solver, and optimist 😎. I work at{' '}
-					<LinkPreview url={links.wedevx}>WEDEVX</LinkPreview>, where I design
-					and build backend infrastructures and microservices using{' '}
+					I&apos;m a software engineer 🇰🇬, problem solver, and optimist 😎. I
+					work at <LinkPreview url={links.wedevx}>WEDEVX</LinkPreview>, where I
+					design and build backend infrastructures and microservices using{' '}
 					<LinkPreview url={links.nest}>Nest.js</LinkPreview> and{' '}
 					<LinkPreview url={links.fastify}>Fastify</LinkPreview>.
 				</p>
