@@ -9,6 +9,7 @@ import SectionWrapper from 'shared/ui/section.wrapper'
 import { Badge } from 'ui/badge'
 import { Button } from 'ui/button'
 import LinkPreview from 'ui/link-preview'
+import { Heading3 } from 'ui/sections/heading'
 import { Separator } from 'ui/separator'
 
 import {
@@ -22,7 +23,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react'
 const Work: React.FC = () => {
 	return (
 		<SectionWrapper>
-			<h3 className='mb-5 text-lg font-medium'>Work Experience</h3>
+			<Heading3>Work Experience</Heading3>
 
 			<div className='flex flex-col gap-2'>
 				{formatExperiences(experiences).map((props, index) => (
@@ -64,7 +65,9 @@ const Experience: React.FC<TExperience> = ({
 			<div className='mb-3 cursor-pointer select-none' onClick={toggleExpanded}>
 				<div className='flex items-center justify-between'>
 					<div className='flex-1'>
-						<LinkPreview url={url}>{company}</LinkPreview>
+						<LinkPreview url={url} className='text-lg'>
+							{company}
+						</LinkPreview>
 
 						<div className='flex flex-col'>
 							<span className='text-sm text-zinc-600 dark:text-zinc-400'>

@@ -5,6 +5,7 @@ import type React from 'react'
 
 import Link from 'next/link'
 import { Magnetic } from 'ui/magnetic'
+import { Heading3 } from 'ui/sections/heading'
 
 import { ContactEnum } from 'config/contact'
 import { socialMedia } from 'config/social-media'
@@ -49,7 +50,7 @@ const MagneticSocialLink: React.FC<MagneticSocialLinkProps> = ({
 const Connect: React.FC = () => {
 	return (
 		<motion.section variants={VARIANTS_SECTION} transition={TRANSITION_SECTION}>
-			<h3 className='mb-5 text-lg font-medium'>Connect</h3>
+			<Heading3>Connect</Heading3>
 			<p className='mb-5 text-zinc-600 dark:text-zinc-400'>
 				Feel free to contact me at{' '}
 				<a className='underline dark:text-zinc-300' href={ContactEnum.EMAIL}>

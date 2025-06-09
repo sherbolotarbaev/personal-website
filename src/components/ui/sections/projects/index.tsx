@@ -15,6 +15,7 @@ import {
 	MorphingDialogContent,
 	MorphingDialogTrigger,
 } from 'ui/morphing-dialog'
+import { Heading3 } from 'ui/sections/heading'
 
 import { cn } from 'utils'
 import { projects, TProject } from './lib/projects'
@@ -197,7 +198,7 @@ const Projects: React.FC = () => {
 
 	return (
 		<SectionWrapper>
-			<h3 className='mb-5 text-lg font-medium'>Selected Projects</h3>
+			<Heading3>Featured Projects</Heading3>
 			<div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
 				<AnimatePresence mode='popLayout'>
 					{displayedProjects.map((project, index) => (
@@ -219,7 +220,7 @@ const Projects: React.FC = () => {
 						className='text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300'
 						onClick={() => setShowAll(!showAll)}
 					>
-						{showAll ? 'Show less' : 'See more'}
+						{showAll ? 'Show less..' : 'See more..'}
 					</Button>
 				</motion.div>
 			)}

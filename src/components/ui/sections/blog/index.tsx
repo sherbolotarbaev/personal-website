@@ -1,17 +1,19 @@
 import type React from 'react'
 
-import { getBlogPosts } from 'lib/blog'
 import Link from 'next/link'
 import SectionWrapper from 'shared/ui/section.wrapper'
 import { AnimatedBackground } from 'ui/animated-background'
+import { Heading3 } from 'ui/sections/heading'
 import { BlogPostItem } from './blog-post-item'
+
+import { getBlogPosts } from 'lib/blog'
 
 const Blog: React.FC = async () => {
 	const blogPosts = await getBlogPosts()
 
 	return (
 		<SectionWrapper>
-			<h3 className='mb-3 text-lg font-medium'>Blog</h3>
+			<Heading3>Blog</Heading3>
 			<div className='flex flex-col'>
 				<AnimatedBackground
 					enableHover
