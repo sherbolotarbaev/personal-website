@@ -57,7 +57,7 @@ const Connect: React.FC = () => {
 					{ContactEnum.EMAIL.replace('mailto:', '')}
 				</a>
 			</p>
-			<div className='flex items-center justify-start gap-3'>
+			<div className='flex flex-wrap items-center justify-start gap-3'>
 				{socialMedia.map(({ name, href }) => (
 					<MagneticSocialLink key={name} link={href}>
 						{name}

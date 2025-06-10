@@ -18,18 +18,31 @@ export type TExperience = {
 		totalDuration?: string
 	}
 	location: string
+	type?: 'full-time' | 'part-time' | 'internship' | 'freelance' | 'remote'
 	positions: TPosition[]
 	url: string
 }
 
 export const experiences: TExperience[] = [
 	{
-		company: 'WEDEVX',
+		company: 'PeopleUp',
+		type: 'full-time',
 		duration: {
-			startDate: '2023-06-01',
+			startDate: '2025-06-01',
 			endDate: 'Present',
 		},
-		location: 'Chicago, Illinois, United States • Remote',
+		location: 'San Francisco, United States',
+		url: 'https://www.peopleup.ai',
+		positions: [],
+	},
+	{
+		company: 'WEDEVX',
+		type: 'full-time',
+		duration: {
+			startDate: '2023-06-01',
+			endDate: '2025-06-01',
+		},
+		location: 'Chicago, United States',
 		url: 'https://www.wedevx.co',
 		positions: [
 			{
@@ -96,6 +109,7 @@ export const experiences: TExperience[] = [
 	},
 	{
 		company: 'Mancho',
+		type: 'full-time',
 		duration: {
 			startDate: '2021-05-01',
 			endDate: '2023-05-01',

@@ -5,28 +5,28 @@ import type React from 'react'
 import { useEffect, useState } from 'react'
 
 import { AnimatedBackground } from 'ui/animated-background'
+import { Button } from 'ui/button'
+import { AnimatedTextCycle } from './ui/animated-text-cycle'
 
 import { siteConfig } from 'config/site'
 
 import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react'
-import { AnimatedTextCycle } from './ui/animated-text-cycle'
-import { Button } from './ui/button'
 
 const THEMES_OPTIONS = [
 	{
 		label: 'Light',
 		id: 'light',
-		icon: <SunIcon className='size-4' />,
+		icon: <SunIcon />,
 	},
 	{
 		label: 'Dark',
 		id: 'dark',
-		icon: <MoonIcon className='size-4' />,
+		icon: <MoonIcon />,
 	},
 	{
 		label: 'System',
 		id: 'system',
-		icon: <MonitorIcon className='size-4' />,
+		icon: <MonitorIcon />,
 	},
 ]
 

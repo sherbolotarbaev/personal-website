@@ -5,7 +5,6 @@ import Image from 'next/image'
 import type React from 'react'
 import { useRef, useState } from 'react'
 
-import Link from 'next/link'
 import SectionWrapper from 'shared/ui/section.wrapper'
 import { Button } from 'ui/button'
 import {
@@ -34,23 +33,19 @@ const PreviewButton: React.FC<PreviewButtonProps> = ({
 	className,
 }) => {
 	return (
-		<Link
-			href={href}
+		<Button
+			variant='ghost'
+			size='sm'
+			link={href}
 			target='_blank'
-			onClick={e => e.stopPropagation()}
-			passHref
+			onLinkClick={e => e.stopPropagation()}
+			className={cn(
+				'transition-colors duration-200 bg-zinc-800 text-zinc-100 hover:bg-zinc-700 hover:text-zinc-100 cursor-pointer rounded-full text-xs gap-1',
+				className
+			)}
 		>
-			<Button
-				variant='ghost'
-				size='sm'
-				className={cn(
-					'transition-colors duration-200 bg-zinc-800 text-zinc-100 hover:bg-zinc-700 hover:text-zinc-100 cursor-pointer rounded-full text-xs gap-1',
-					className
-				)}
-			>
-				{children}
-			</Button>
-		</Link>
+			{children}
+		</Button>
 	)
 }
 
@@ -272,7 +267,7 @@ const Project: React.FC<TProject & { index?: number }> = ({
 				</div>
 			)}
 			<div className='flex flex-col gap-1 px-1'>
-				<h4 className='max-w-fit font-base inline-block font-[450] text-zinc-900 dark:text-zinc-50'>
+				<h4 className='max-w-fit font-base inline-block font-[450] text-[16.5px] text-zinc-900 dark:text-zinc-50'>
 					{title}
 				</h4>
 

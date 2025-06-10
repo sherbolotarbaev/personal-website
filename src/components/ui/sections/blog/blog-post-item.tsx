@@ -17,7 +17,9 @@ export const BlogPostItem: React.FC<BlogPost> = ({ title, description }) => {
 			transition={{ duration: 0.5 }}
 		>
 			<div className='flex flex-col gap-1'>
-				<h4 className='font-normal dark:text-zinc-100'>{title}</h4>
+				<h4 className='font-normal text-[16.5px] dark:text-zinc-100'>
+					{title}
+				</h4>
 				<p className='text-zinc-500 dark:text-zinc-400 line-clamp-1'>
 					{description}
 				</p>

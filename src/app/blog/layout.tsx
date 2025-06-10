@@ -11,7 +11,7 @@ export default function LayoutBlogPost({
 		<>
 			<div className='pointer-events-none fixed left-0 top-0 z-10 h-12 w-full bg-gray-100 to-transparent backdrop-blur-xl [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)] dark:bg-zinc-950' />
 
-			<div className='absolute right-4 top-24'>
+			<div className='absolute right-4 top-35'>
 				<CopyButton
 					variant='text'
 					content={typeof window !== 'undefined' ? window.location.href : ''}

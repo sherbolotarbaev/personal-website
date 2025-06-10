@@ -117,10 +117,21 @@
 
 @layer base {
 	* {
-		@apply border-border outline-ring/50;
+		@apply border-border;
+		font-feature-settings: 'zero';
+
+		scrollbar-width: thin;
+		scrollbar-color: hsl(var(--muted)) transparent;
 	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
 	body {
 		@apply bg-background text-foreground;
+
+		min-width: 24rem;
 	}
 }
 

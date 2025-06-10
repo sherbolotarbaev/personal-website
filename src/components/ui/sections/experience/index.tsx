@@ -45,12 +45,14 @@ const Experience: React.FC<TExperience> = ({
 	location,
 	url,
 	positions,
+	type,
 }) => {
 	const ref = useRef(null)
 	const isInView = useInView(ref, { once: true, amount: 0.2 })
 	const [isExpanded, setIsExpanded] = useState(false)
 
 	const toggleExpanded = () => {
+		if (positions.length === 0) return
 		setIsExpanded(!isExpanded)
 	}
 
@@ -65,7 +67,7 @@ const Experience: React.FC<TExperience> = ({
 			<div className='mb-3 cursor-pointer select-none' onClick={toggleExpanded}>
 				<div className='flex items-center justify-between'>
 					<div className='flex-1'>
-						<LinkPreview url={url} className='text-lg'>
+						<LinkPreview url={url} className='text-[16.5px]'>
 							{company}
 						</LinkPreview>
 
@@ -75,18 +77,20 @@ const Experience: React.FC<TExperience> = ({
 								{duration.totalDuration}
 							</span>
 							<span className='text-sm text-zinc-600 dark:text-zinc-400'>
-								{location}
+								{location} · {type}
 							</span>
 						</div>
 					</div>
 
-					<Button
-						variant='ghost'
-						size='icon'
-						className='text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300'
-					>
-						{isExpanded ? <ChevronUp /> : <ChevronDown />}
-					</Button>
+					{positions.length > 0 && (
+						<Button
+							variant='ghost'
+							size='icon'
+							className='text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300'
+						>
+							{isExpanded ? <ChevronUp /> : <ChevronDown />}
+						</Button>
+					)}
 				</div>
 			</div>
 

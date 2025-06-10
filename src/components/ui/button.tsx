@@ -41,13 +41,24 @@ const Button: React.FC<
 		VariantProps<typeof buttonVariants> & {
 			asChild?: boolean
 			link?: string
+			target?: '_blank' | '_self' | '_parent' | '_top'
+			onLinkClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void
 		}
-> = ({ className, variant, size, asChild = false, link, ...props }) => {
+> = ({
+	className,
+	variant,
+	size,
+	asChild = false,
+	link,
+	target,
+	onLinkClick,
+	...props
+}) => {
 	const Comp = asChild ? Slot : 'button'
 
 	if (link) {
 		return (
-			<Link href={link} passHref>
+			<Link href={link} passHref target={target} onClick={onLinkClick}>
 				<Comp
 					data-slot='button'
 					className={cn(buttonVariants({ variant, size, className }))}

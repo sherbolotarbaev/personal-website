@@ -13,7 +13,7 @@ const Blog: React.FC = async () => {
 
 	return (
 		<SectionWrapper>
-			<Heading3>Blog</Heading3>
+			<Heading3>Personal Blog</Heading3>
 			<div className='flex flex-col'>
 				<AnimatedBackground
 					enableHover

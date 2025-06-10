@@ -1,8 +1,21 @@
 import type { MDXComponents } from 'mdx/types'
 
+import Link from 'next/link'
 import CodeBlock from 'ui/code-block'
 
 import { cn } from 'utils'
+
+function slugify(str: string) {
+	return str
+		.toString()
+		.toLowerCase()
+		.trim()
+		.replace(/\s+/g, '-')
+		.replace(/&/g, '-and-')
+		.replace(/[^\w\-]+/g, '')
+		.replace(/\-\-+/g, '-')
+		.replace(/^-+|-+$/g, '') // Remove leading and trailing hyphens
+}
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
 	return {
@@ -28,6 +41,16 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 				</p>
 			)
 		},
+		a: ({ children, href }) =>
+			href && (
+				<Link
+					className='font-medium underline decoration-zinc-400 hover:decoration-zinc-500 dark:decoration-zinc-500 dark:hover:decoration-zinc-400 underline-offset-2 italic'
+					href={href}
+					target='_blank'
+				>
+					{children}
+				</Link>
+			),
 		li: ({ children, className }) => {
 			return (
 				<li
@@ -87,6 +110,36 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 					language={language}
 					codeContent={codeContent}
 				/>
+			)
+		},
+		h1: ({ children, className }) => {
+			const slug = children ? slugify(children.toString()) : ''
+			return (
+				<Link href={`#${slug}`} className='no-underline scroll-mt-5'>
+					<h1 id={slug} className={className}>
+						{children}
+					</h1>
+				</Link>
+			)
+		},
+		h2: ({ children, className }) => {
+			const slug = children ? slugify(children.toString()) : ''
+			return (
+				<Link href={`#${slug}`} className='no-underline scroll-mt-5'>
+					<h2 id={slug} className={className}>
+						{children}
+					</h2>
+				</Link>
+			)
+		},
+		h3: ({ children, className }) => {
+			const slug = children ? slugify(children.toString()) : ''
+			return (
+				<Link href={`#${slug}`} className='no-underline scroll-mt-5'>
+					<h3 id={slug} className={className}>
+						{children}
+					</h3>
+				</Link>
 			)
 		},
 	}
