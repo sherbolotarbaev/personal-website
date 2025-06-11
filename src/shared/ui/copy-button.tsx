@@ -19,12 +19,14 @@ const CopyButton: React.FC<CopyButtonProps> = ({
 	variant = 'icon',
 }) => {
 	const [copied, setCopied] = useState(false)
+	const [tooltipOpen, setTooltipOpen] = useState(false)
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
 	const copy = useCallback(async () => {
 		try {
 			await navigator.clipboard.writeText(content)
 			setCopied(true)
+			setTooltipOpen(true)
 
 			if (timeoutRef.current) {
 				clearTimeout(timeoutRef.current)
@@ -32,6 +34,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({
 
 			timeoutRef.current = setTimeout(() => {
 				setCopied(false)
+				setTooltipOpen(false)
 				timeoutRef.current = null
 			}, 2000)
 		} catch (error) {
@@ -63,7 +66,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({
 	}
 
 	return (
-		<Tooltip>
+		<Tooltip open={tooltipOpen} onOpenChange={setTooltipOpen}>
 			<TooltipTrigger asChild>
 				<Button
 					variant='outline'

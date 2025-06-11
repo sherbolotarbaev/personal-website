@@ -73,8 +73,8 @@ const Experience: React.FC<TExperience> = ({
 
 						<div className='flex flex-col'>
 							<span className='text-sm text-zinc-600 dark:text-zinc-400'>
-								{duration.startDate} - {duration.endDate} ·{' '}
-								{duration.totalDuration}
+								{duration.startDate} - {duration.endDate}{' '}
+								{duration.totalDuration && `· ${duration.totalDuration}`}
 							</span>
 							<span className='text-sm text-zinc-600 dark:text-zinc-400'>
 								{location} · {type}
