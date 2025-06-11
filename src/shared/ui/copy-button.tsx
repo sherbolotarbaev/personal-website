@@ -10,13 +10,15 @@ import { Tooltip, TooltipContent, TooltipTrigger } from 'ui/tooltip'
 import { Check, Clipboard } from 'lucide-react'
 
 interface CopyButtonProps {
-	content: string | (() => string)
+	content?: string
 	variant?: 'icon' | 'text'
+	copyUrl?: boolean
 }
 
 const CopyButton: React.FC<CopyButtonProps> = ({
 	content,
 	variant = 'icon',
+	copyUrl = false,
 }) => {
 	const [copied, setCopied] = useState(false)
 	const [tooltipOpen, setTooltipOpen] = useState(false)
@@ -24,7 +26,16 @@ const CopyButton: React.FC<CopyButtonProps> = ({
 
 	const copy = useCallback(async () => {
 		try {
-			const textToCopy = typeof content === 'function' ? content() : content
+			let textToCopy: string
+
+			if (copyUrl) {
+				textToCopy = window.location.href
+			} else if (content) {
+				textToCopy = content
+			} else {
+				return // No content to copy
+			}
+
 			await navigator.clipboard.writeText(textToCopy)
 			setCopied(true)
 			setTooltipOpen(true)
@@ -41,7 +52,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({
 		} catch (error) {
 			console.error('Failed to copy to clipboard:', error)
 		}
-	}, [content])
+	}, [content, copyUrl])
 
 	useEffect(() => {
 		return () => {
