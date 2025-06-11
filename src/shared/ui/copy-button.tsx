@@ -10,7 +10,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from 'ui/tooltip'
 import { Check, Clipboard } from 'lucide-react'
 
 interface CopyButtonProps {
-	content: string
+	content: string | (() => string)
 	variant?: 'icon' | 'text'
 }
 
@@ -24,7 +24,8 @@ const CopyButton: React.FC<CopyButtonProps> = ({
 
 	const copy = useCallback(async () => {
 		try {
-			await navigator.clipboard.writeText(content)
+			const textToCopy = typeof content === 'function' ? content() : content
+			await navigator.clipboard.writeText(textToCopy)
 			setCopied(true)
 			setTooltipOpen(true)
 
