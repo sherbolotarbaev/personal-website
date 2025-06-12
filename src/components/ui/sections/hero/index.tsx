@@ -18,7 +18,13 @@ const Hero: React.FC = () => {
 			<div className='flex w-full flex-col gap-5'>
 				<div className='flex items-center gap-2.5'>
 					{socialMedia.map(({ name, href, icon }) => (
-						<Button size='icon' variant='outline' key={name} link={href}>
+						<Button
+							size='icon'
+							variant='outline'
+							key={name}
+							link={href}
+							target='_blank'
+						>
 							{icon}
 						</Button>
 					))}

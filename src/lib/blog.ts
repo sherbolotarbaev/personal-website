@@ -11,7 +11,7 @@ export type BlogPost = {
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
-	const blogDir = path.join(process.cwd(), 'src/app/blog')
+	const blogDir = path.join(process.cwd(), 'src/app/blog/(slug)')
 
 	try {
 		const entries = fs.readdirSync(blogDir, { withFileTypes: true })
@@ -28,7 +28,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 				// Check if config.ts exists
 				if (fs.existsSync(configPath)) {
 					// Dynamically import the config using relative module path
-					const configModule = await import(`../app/blog/${dir}/config`)
+					const configModule = await import(`../app/blog/(slug)/${dir}/config`)
 					const config = configModule.config
 
 					if (config) {

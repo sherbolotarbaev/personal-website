@@ -115,8 +115,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		h1: ({ children, className }) => {
 			const slug = children ? slugify(children.toString()) : ''
 			return (
-				<Link href={`#${slug}`} className='no-underline scroll-mt-5'>
-					<h1 id={slug} className={className}>
+				<Link href={`#${slug}`} className='no-underline' passHref>
+					<h1 id={slug} className={cn('scroll-mt-5', className)}>
 						{children}
 					</h1>
 				</Link>
@@ -125,8 +125,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		h2: ({ children, className }) => {
 			const slug = children ? slugify(children.toString()) : ''
 			return (
-				<Link href={`#${slug}`} className='no-underline scroll-mt-5'>
-					<h2 id={slug} className={className}>
+				<Link href={`#${slug}`} className='no-underline' passHref>
+					<h2 id={slug} className={cn('scroll-mt-5', className)}>
 						{children}
 					</h2>
 				</Link>
@@ -135,8 +135,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		h3: ({ children, className }) => {
 			const slug = children ? slugify(children.toString()) : ''
 			return (
-				<Link href={`#${slug}`} className='no-underline scroll-mt-5'>
-					<h3 id={slug} className={className}>
+				<Link href={`#${slug}`} className='no-underline' passHref>
+					<h3 id={slug} className={cn('scroll-mt-5', className)}>
 						{children}
 					</h3>
 				</Link>
