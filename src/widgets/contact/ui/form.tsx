@@ -120,8 +120,13 @@ export const ContactForm: React.FC = () => {
 						</Button>
 					) : (
 						<Button
+							type='submit'
 							isLoading={form.formState.isSubmitting}
-							disabled={!form.formState.isValid || !form.formState.isDirty}
+							disabled={
+								form.formState.isSubmitting ||
+								!form.formState.isValid ||
+								!form.formState.isDirty
+							}
 							loadingText='Sending...'
 							className='w-full sm:w-auto'
 						>
