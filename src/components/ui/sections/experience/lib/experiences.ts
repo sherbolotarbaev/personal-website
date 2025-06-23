@@ -49,14 +49,14 @@ export const experiences: TExperience[] = [
 				title: 'Lead Software Development Engineer',
 				period: {
 					startDate: '2025-02-01',
-					endDate: 'Present',
+					endDate: '2025-06-01',
 				},
 			},
 			{
 				title: 'Software Development Engineer II',
 				period: {
 					startDate: '2024-02-01',
-					endDate: 'Present',
+					endDate: '2025-06-01',
 				},
 				description: `Led development of NestJS microservices, increasing system performance by 99% through batching and Prisma optimizations. Improved query efficiency by refining system architecture, reducing database processing time from 7 minutes to 7 seconds.
 				

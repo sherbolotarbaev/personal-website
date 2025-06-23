@@ -171,7 +171,9 @@ const Experience: React.FC<TExperience> = ({
 										)}
 
 										<div className='leading-relaxed mb-1'>
-											<h3 className='tracking-tight font-medium'>{title}</h3>
+											<h3 className='tracking-tight font-medium text-[15.5px]'>
+												{title}
+											</h3>
 
 											<span className='text-sm text-zinc-600 dark:text-zinc-400'>
 												{period.startDate} - {period.endDate} ·{' '}
