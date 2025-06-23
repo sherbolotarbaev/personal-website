@@ -78,6 +78,7 @@ const Button: React.FC<
 		<Comp
 			data-slot='button'
 			className={cn(buttonVariants({ variant, size, className }))}
+			disabled={isLoading || props.disabled}
 			{...props}
 		>
 			{isLoading ? (
