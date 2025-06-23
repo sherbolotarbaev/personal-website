@@ -62,7 +62,8 @@ const DrawerContent: React.FC<
 				)}
 				{...props}
 			>
-				<div className='bg-muted mx-auto mt-4 hidden h-1 w-12 shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block' />
+				<div className='bg-accent mx-auto h-[3px] w-12 shrink-0 rounded-full absolute -top-3 left-1/2 -translate-x-1/2 hidden group-data-[vaul-drawer-direction=bottom]/drawer-content:block' />
+
 				{children}
 			</DrawerPrimitive.Content>
 		</DrawerPortal>
@@ -104,7 +105,7 @@ const DrawerTitle: React.FC<
 	return (
 		<DrawerPrimitive.Title
 			data-slot='drawer-title'
-			className={cn('text-foreground font-semibold', className)}
+			className={cn('text-foreground font-semibold text-lg', className)}
 			{...props}
 		/>
 	)

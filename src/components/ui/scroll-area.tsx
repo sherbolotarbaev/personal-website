@@ -6,21 +6,23 @@ import type React from 'react'
 import { cn } from 'utils'
 
 const ScrollArea: React.FC<
-	React.ComponentProps<typeof ScrollAreaPrimitive.Root>
-> = ({ className, children, ...props }) => {
+	React.ComponentProps<typeof ScrollAreaPrimitive.Root> & {
+		hideScrollBar?: boolean
+	}
+> = ({ className, children, hideScrollBar, ...props }) => {
 	return (
 		<ScrollAreaPrimitive.Root
 			data-slot='scroll-area'
-			className={cn('relative', className)}
+			className={cn('relative size-full', className)}
 			{...props}
 		>
 			<ScrollAreaPrimitive.Viewport
 				data-slot='scroll-area-viewport'
-				className='focus-visible:ring-ring/50 size-full rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:outline-1'
+				className='size-full rounded-[inherit] transition-[color,box-shadow] outline-none'
 			>
 				{children}
 			</ScrollAreaPrimitive.Viewport>
-			<ScrollBar />
+			<ScrollBar hidden={hideScrollBar} />
 			<ScrollAreaPrimitive.Corner />
 		</ScrollAreaPrimitive.Root>
 	)

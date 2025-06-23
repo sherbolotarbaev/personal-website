@@ -5,6 +5,8 @@ import type React from 'react'
 
 import { cn } from 'utils'
 
+import { Loader2 } from 'lucide-react'
+
 const buttonVariants = cva(
 	'inline-flex items-center justify-center gap-1.5 whitespace-nowrap rounded-[20px] text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
 	{
@@ -42,6 +44,8 @@ const Button: React.FC<
 			asChild?: boolean
 			link?: string
 			target?: '_blank' | '_self' | '_parent' | '_top'
+			isLoading?: boolean
+			loadingText?: string
 			onLinkClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void
 		}
 > = ({
@@ -49,6 +53,8 @@ const Button: React.FC<
 	variant,
 	size,
 	asChild = false,
+	isLoading = false,
+	loadingText,
 	link,
 	target,
 	onLinkClick,
@@ -73,7 +79,15 @@ const Button: React.FC<
 			data-slot='button'
 			className={cn(buttonVariants({ variant, size, className }))}
 			{...props}
-		/>
+		>
+			{isLoading ? (
+				<div className='flex items-center gap-1.5 font-light'>
+					<Loader2 className='animate-spin size-5' /> {loadingText}
+				</div>
+			) : (
+				props.children
+			)}
+		</Comp>
 	)
 }
 

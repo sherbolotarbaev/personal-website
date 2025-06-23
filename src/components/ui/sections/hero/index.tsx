@@ -8,11 +8,14 @@ import LinkPreview from 'ui/link-preview'
 
 import { ContactEnum } from 'config/contact'
 import { socialMedia } from 'config/social-media'
+import { useModalStore } from 'lib/store'
 import { links } from './lib/links'
 
-import { MessageCircle } from 'lucide-react'
+import { Mail, MessageCircle } from 'lucide-react'
 
 const Hero: React.FC = () => {
+	const { toggleModal } = useModalStore()
+
 	return (
 		<SectionWrapper>
 			<div className='flex w-full flex-col gap-5'>
@@ -41,9 +44,12 @@ const Hero: React.FC = () => {
 				</p>
 
 				<div className='flex items-center gap-2.5'>
-					<Button link={ContactEnum.EMAIL}>
+					<Button onClick={toggleModal}>
 						<MessageCircle />
 						Get in touch
+					</Button>
+					<Button link={ContactEnum.EMAIL} variant='outline'>
+						<Mail /> Email
 					</Button>
 				</div>
 			</div>

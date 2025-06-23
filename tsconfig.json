@@ -25,6 +25,7 @@
 			"components/*": ["./src/components/*"],
 			"ui/*": ["./src/components/ui/*"],
 			"lib/*": ["./src/lib/*"],
+			"actions/*": ["./src/lib/actions/*"],
 			"utils": ["./src/lib/utils"],
 			"hooks/*": ["./src/lib/hooks/*"],
 			"features/*": ["./src/lib/store/features/*"],

@@ -5,6 +5,7 @@ import Experience from 'ui/sections/experience'
 import Hero from 'ui/sections/hero'
 import Projects from 'ui/sections/projects'
 import Skills from 'ui/sections/skills'
+import { ContactModal } from 'widgets/contact'
 
 export default function HomePage() {
 	return (
@@ -15,6 +16,7 @@ export default function HomePage() {
 			<Skills />
 			<Blog />
 			<Connect />
+			<ContactModal />
 		</ContainerWrapper>
 	)
 }

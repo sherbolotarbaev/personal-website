@@ -2,6 +2,7 @@
 
 import type React from 'react'
 
+import { Toaster } from 'ui/sonner'
 import { TooltipProvider } from 'ui/tooltip'
 import ThemeProvider from './theme'
 
@@ -20,6 +21,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
 					enableSystem
 				>
 					{children}
+					<Toaster />
 				</ThemeProvider>
 			</TooltipProvider>
 		</>
