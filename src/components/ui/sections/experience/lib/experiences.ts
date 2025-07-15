@@ -5,6 +5,7 @@ export type TPosition = {
 		endDate: string | 'Present'
 		duration?: string
 	}
+	type?: 'part-time' | 'full-time' | 'internship' | 'freelance'
 	description?: string
 	covers?: string[]
 	skills?: string[]
@@ -18,7 +19,7 @@ export type TExperience = {
 		totalDuration?: string
 	}
 	location: string
-	type?: 'full-time' | 'part-time' | 'internship' | 'freelance' | 'remote'
+	type?: 'remote' | 'on-site' | 'hybrid'
 	positions: TPosition[]
 	url: string
 }
@@ -26,18 +27,27 @@ export type TExperience = {
 export const experiences: TExperience[] = [
 	{
 		company: 'PeopleUp',
-		type: 'full-time',
+		type: 'remote',
 		duration: {
 			startDate: '2025-06-01',
 			endDate: 'Present',
 		},
 		location: 'San Francisco, United States',
 		url: 'https://www.peopleup.ai',
-		positions: [],
+		positions: [
+			{
+				title: 'Senior Software Engineer',
+				period: {
+					startDate: '2025-06-01',
+					endDate: 'Present',
+				},
+				type: 'full-time',
+			},
+		],
 	},
 	{
 		company: 'WEDEVX',
-		type: 'full-time',
+		type: 'remote',
 		duration: {
 			startDate: '2023-06-01',
 			endDate: '2025-06-01',
@@ -51,6 +61,7 @@ export const experiences: TExperience[] = [
 					startDate: '2025-02-01',
 					endDate: '2025-06-01',
 				},
+				type: 'full-time',
 			},
 			{
 				title: 'Software Development Engineer II',
@@ -79,6 +90,7 @@ export const experiences: TExperience[] = [
 					'Amazon Web Services (AWS)',
 					'Prisma ORM',
 				],
+				type: 'full-time',
 			},
 			{
 				title: 'Software Development Engineer',
@@ -104,12 +116,13 @@ export const experiences: TExperience[] = [
 					'Amazon S3',
 					'Code Review',
 				],
+				type: 'full-time',
 			},
 		],
 	},
 	{
 		company: 'Mancho',
-		type: 'full-time',
+		type: 'on-site',
 		duration: {
 			startDate: '2021-05-01',
 			endDate: '2023-05-01',
@@ -135,6 +148,7 @@ export const experiences: TExperience[] = [
 					'Docker',
 					'Amazon S3',
 				],
+				type: 'full-time',
 			},
 			{
 				title: 'Frontend Developer',
@@ -145,6 +159,7 @@ export const experiences: TExperience[] = [
 				description: `Optimized cross-platform websites with React, Next.js, and TypeScript, improving performance by 40%. Applied caching strategies to reduce page load times.`,
 				covers: ['/images/mancho.png'],
 				skills: ['React', 'Next.js', 'Redux', 'TypeScript'],
+				type: 'full-time',
 			},
 			{
 				title: 'Intern Frontend Developer',
@@ -154,6 +169,7 @@ export const experiences: TExperience[] = [
 				},
 				description: `Assisted in frontend development with React and JavaScript, gaining hands-on experience with modern practices.`,
 				skills: ['TypeScript', 'React', 'SASS'],
+				type: 'internship',
 			},
 		],
 	},

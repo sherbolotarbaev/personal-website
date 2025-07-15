@@ -52,7 +52,7 @@ const Experience: React.FC<TExperience> = ({
 	const [isExpanded, setIsExpanded] = useState(false)
 
 	const toggleExpanded = () => {
-		if (positions.length === 0) return
+		if (positions.length === 1) return
 		setIsExpanded(!isExpanded)
 	}
 
@@ -67,22 +67,37 @@ const Experience: React.FC<TExperience> = ({
 			<div className='mb-3 cursor-pointer select-none' onClick={toggleExpanded}>
 				<div className='flex items-center justify-between'>
 					<div className='flex-1'>
-						<LinkPreview url={url} className='text-[16.5px]'>
-							{company}
-						</LinkPreview>
+						{positions.length === 1 ? (
+							<h3 className='text-zinc-900 dark:text-zinc-50 font-[450] font-base text-[17px]'>
+								{positions[0].title}
+							</h3>
+						) : (
+							<LinkPreview url={url} className='text-[17px]'>
+								{company}
+							</LinkPreview>
+						)}
 
 						<div className='flex flex-col'>
+							{positions.length === 1 && (
+								<LinkPreview
+									url={url}
+									className='text-[14px] font-normal text-zinc-900 dark:text-zinc-400 max-w-fit'
+								>
+									{company}
+								</LinkPreview>
+							)}
 							<span className='text-sm text-zinc-600 dark:text-zinc-400'>
 								{duration.startDate} - {duration.endDate}{' '}
 								{duration.totalDuration && `· ${duration.totalDuration}`}
 							</span>
 							<span className='text-sm text-zinc-600 dark:text-zinc-400'>
-								{location} · {type}
+								{location}{' '}
+								{type && ` · ${type.charAt(0).toUpperCase() + type.slice(1)}`}
 							</span>
 						</div>
 					</div>
 
-					{positions.length > 0 && (
+					{positions.length > 1 && (
 						<Button
 							variant='ghost'
 							size='icon'
@@ -121,171 +136,190 @@ const Experience: React.FC<TExperience> = ({
 						className='overflow-hidden'
 					>
 						<div className='flex flex-col gap-6 relative pt-2'>
-							{positions.map(
-								({ title, description, period, covers, skills }, posIndex) => (
-									<motion.div
-										key={posIndex}
-										className='relative pl-6'
-										initial={{ opacity: 0, y: 20 }}
-										animate={
-											isInView && isExpanded
-												? { opacity: 1, y: 0 }
-												: { opacity: 0, y: 20 }
-										}
-										transition={{
-											duration: 0.3,
-											delay: posIndex * 0.05 + 0.1,
-											ease: 'easeOut',
-										}}
-									>
+							{positions.length > 1 &&
+								positions.map(
+									(
+										{ title, description, period, covers, skills, type },
+										posIndex
+									) => (
 										<motion.div
-											className='absolute left-0 top-1.5 size-2 rounded-full bg-zinc-500 dark:bg-zinc-400'
-											initial={{ scale: 0, opacity: 0 }}
+											key={posIndex}
+											className='relative pl-6'
+											initial={{ opacity: 0, y: 20 }}
 											animate={
 												isInView && isExpanded
-													? { scale: 1, opacity: 1 }
-													: { scale: 0, opacity: 0 }
+													? { opacity: 1, y: 0 }
+													: { opacity: 0, y: 20 }
 											}
 											transition={{
-												duration: 0.2,
-												delay: posIndex * 0.05 + 0.15,
+												duration: 0.3,
+												delay: posIndex * 0.05 + 0.1,
 												ease: 'easeOut',
 											}}
-										/>
-										{posIndex !== positions.length - 1 && (
+										>
 											<motion.div
-												className='absolute left-[3.3px] top-4 bottom-[-24px] w-[1px] bg-zinc-200 dark:bg-zinc-800'
-												initial={{ scaleY: 0, opacity: 0 }}
+												className='absolute left-0 top-1.5 size-2 rounded-full bg-zinc-500 dark:bg-zinc-400'
+												initial={{ scale: 0, opacity: 0 }}
 												animate={
 													isInView && isExpanded
-														? { scaleY: 1, opacity: 1 }
-														: { scaleY: 0, opacity: 0 }
+														? { scale: 1, opacity: 1 }
+														: { scale: 0, opacity: 0 }
 												}
 												transition={{
-													duration: 0.3,
-													delay: posIndex * 0.05 + 0.2,
-													ease: 'easeOut',
-												}}
-												style={{ originY: 0 }}
-											/>
-										)}
-
-										<div className='leading-relaxed mb-1'>
-											<h3 className='tracking-tight font-medium text-[15.5px]'>
-												{title}
-											</h3>
-
-											<span className='text-sm text-zinc-600 dark:text-zinc-400'>
-												{period.startDate} - {period.endDate} ·{' '}
-												{period.duration}
-											</span>
-										</div>
-
-										{description && (
-											<motion.p
-												className='leading-relaxed text-zinc-600 dark:text-zinc-300'
-												dangerouslySetInnerHTML={{
-													__html: description,
-												}}
-												initial={{ opacity: 0, y: 10 }}
-												animate={
-													isInView && isExpanded
-														? { opacity: 1, y: 0 }
-														: { opacity: 0, y: 10 }
-												}
-												transition={{
-													duration: 0.25,
-													delay: posIndex * 0.05 + 0.2,
+													duration: 0.2,
+													delay: posIndex * 0.05 + 0.15,
 													ease: 'easeOut',
 												}}
 											/>
-										)}
+											{posIndex !== positions.length - 1 && (
+												<motion.div
+													className='absolute left-[3.3px] top-4 bottom-[-24px] w-[1px] bg-zinc-200 dark:bg-zinc-800'
+													initial={{ scaleY: 0, opacity: 0 }}
+													animate={
+														isInView && isExpanded
+															? { scaleY: 1, opacity: 1 }
+															: { scaleY: 0, opacity: 0 }
+													}
+													transition={{
+														duration: 0.3,
+														delay: posIndex * 0.05 + 0.2,
+														ease: 'easeOut',
+													}}
+													style={{ originY: 0 }}
+												/>
+											)}
 
-										{covers && covers.length > 0 && (
-											<motion.div
-												className='mt-4 flex flex-wrap gap-3'
-												initial={{ opacity: 0, y: 20 }}
-												animate={
-													isInView && isExpanded
-														? { opacity: 1, y: 0 }
-														: { opacity: 0, y: 20 }
-												}
-												transition={{
-													duration: 0.3,
-													delay: posIndex * 0.05 + 0.25,
-													ease: 'easeOut',
-												}}
-											>
-												{covers.map((cover, coverIndex) => (
-													<motion.div
-														key={coverIndex}
-														initial={{ opacity: 0, scale: 0.9 }}
-														animate={
-															isInView && isExpanded
-																? { opacity: 1, scale: 1 }
-																: { opacity: 0, scale: 0.9 }
-														}
-														transition={{
-															duration: 0.2,
-															delay: posIndex * 0.05 + 0.3 + coverIndex * 0.05,
-															ease: 'easeOut',
-														}}
-													>
-														<ImageThumbnail
-															src={cover || '/placeholder.svg'}
-															alt={`${title} - ${company} (cover ${
-																coverIndex + 1
-															})`}
-															className='md:max-w-72 shadow-lg'
-														/>
-													</motion.div>
-												))}
-											</motion.div>
-										)}
+											<div className='leading-relaxed mb-1'>
+												<h3 className='tracking-tight font-medium text-[15.5px]'>
+													{title}
+												</h3>
 
-										{skills && skills.length > 0 && (
-											<motion.div
-												className='flex flex-wrap gap-2 mt-4'
-												initial={{ opacity: 0, y: 15 }}
-												animate={
-													isInView && isExpanded
-														? { opacity: 1, y: 0 }
-														: { opacity: 0, y: 15 }
-												}
-												transition={{
-													duration: 0.25,
-													delay: posIndex * 0.05 + 0.3,
-													ease: 'easeOut',
-												}}
-											>
-												{skills.map((skill, skillIndex) => (
-													<motion.div
-														key={skillIndex}
-														initial={{ opacity: 0, scale: 0.8 }}
-														animate={
-															isInView && isExpanded
-																? { opacity: 1, scale: 1 }
-																: { opacity: 0, scale: 0.8 }
-														}
-														transition={{
-															duration: 0.15,
-															delay: posIndex * 0.05 + 0.35 + skillIndex * 0.03,
-															ease: 'easeOut',
-														}}
-													>
-														<Badge
-															variant='secondary'
-															className='bg-zinc-100 text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700'
+												<div className='flex flex-col'>
+													{type && (
+														<span className='text-sm text-zinc-600 dark:text-zinc-400'>
+															{type === 'full-time'
+																? 'Full-time'
+																: type === 'part-time'
+																? 'Part-time'
+																: type === 'internship'
+																? 'Internship'
+																: 'Freelance'}
+														</span>
+													)}
+													<span className='text-sm text-zinc-600 dark:text-zinc-400'>
+														{period.startDate} - {period.endDate} ·{' '}
+														{period.duration}
+													</span>
+												</div>
+											</div>
+
+											{description && (
+												<motion.p
+													className='leading-relaxed text-zinc-600 dark:text-zinc-300'
+													dangerouslySetInnerHTML={{
+														__html: description,
+													}}
+													initial={{ opacity: 0, y: 10 }}
+													animate={
+														isInView && isExpanded
+															? { opacity: 1, y: 0 }
+															: { opacity: 0, y: 10 }
+													}
+													transition={{
+														duration: 0.25,
+														delay: posIndex * 0.05 + 0.2,
+														ease: 'easeOut',
+													}}
+												/>
+											)}
+
+											{covers && covers.length > 0 && (
+												<motion.div
+													className='mt-4 flex flex-wrap gap-3'
+													initial={{ opacity: 0, y: 20 }}
+													animate={
+														isInView && isExpanded
+															? { opacity: 1, y: 0 }
+															: { opacity: 0, y: 20 }
+													}
+													transition={{
+														duration: 0.3,
+														delay: posIndex * 0.05 + 0.25,
+														ease: 'easeOut',
+													}}
+												>
+													{covers.map((cover, coverIndex) => (
+														<motion.div
+															key={coverIndex}
+															initial={{ opacity: 0, scale: 0.9 }}
+															animate={
+																isInView && isExpanded
+																	? { opacity: 1, scale: 1 }
+																	: { opacity: 0, scale: 0.9 }
+															}
+															transition={{
+																duration: 0.2,
+																delay:
+																	posIndex * 0.05 + 0.3 + coverIndex * 0.05,
+																ease: 'easeOut',
+															}}
 														>
-															{skill}
-														</Badge>
-													</motion.div>
-												))}
-											</motion.div>
-										)}
-									</motion.div>
-								)
-							)}
+															<ImageThumbnail
+																src={cover || '/placeholder.svg'}
+																alt={`${title} - ${company} (cover ${
+																	coverIndex + 1
+																})`}
+																className='md:max-w-72 shadow-lg'
+															/>
+														</motion.div>
+													))}
+												</motion.div>
+											)}
+
+											{skills && skills.length > 0 && (
+												<motion.div
+													className='flex flex-wrap gap-2 mt-4'
+													initial={{ opacity: 0, y: 15 }}
+													animate={
+														isInView && isExpanded
+															? { opacity: 1, y: 0 }
+															: { opacity: 0, y: 15 }
+													}
+													transition={{
+														duration: 0.25,
+														delay: posIndex * 0.05 + 0.3,
+														ease: 'easeOut',
+													}}
+												>
+													{skills.map((skill, skillIndex) => (
+														<motion.div
+															key={skillIndex}
+															initial={{ opacity: 0, scale: 0.8 }}
+															animate={
+																isInView && isExpanded
+																	? { opacity: 1, scale: 1 }
+																	: { opacity: 0, scale: 0.8 }
+															}
+															transition={{
+																duration: 0.15,
+																delay:
+																	posIndex * 0.05 + 0.35 + skillIndex * 0.03,
+																ease: 'easeOut',
+															}}
+														>
+															<Badge
+																variant='secondary'
+																className='bg-zinc-100 text-black transition-colors duration-200 hover:bg-zinc-950 hover:text-zinc-50 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700'
+															>
+																{skill}
+															</Badge>
+														</motion.div>
+													))}
+												</motion.div>
+											)}
+										</motion.div>
+									)
+								)}
 						</div>
 					</motion.div>
 				)}
