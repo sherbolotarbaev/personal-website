@@ -16,6 +16,7 @@ import {
 	motion,
 	useMotionValue,
 	useSpring,
+	Variants,
 } from 'motion/react'
 import { encode } from 'qss'
 
@@ -166,7 +167,7 @@ export const HoverPeek: React.FC<HoverPeekProps> = ({
 	}
 
 	// Defines how the main preview card animates in and out (a little 3D flip).
-	const cardMotionVariants = {
+	const cardMotionVariants: Variants = {
 		initial: { opacity: 0, rotateY: -90, transition: { duration: 0.15 } },
 		animate: {
 			opacity: 1,
@@ -177,7 +178,7 @@ export const HoverPeek: React.FC<HoverPeekProps> = ({
 	}
 
 	// Defines how the lens overlay animates.
-	const lensMotionVariants = {
+	const lensMotionVariants: Variants = {
 		initial: { opacity: 0, scale: 0.7 },
 		animate: {
 			opacity: 1,

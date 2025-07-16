@@ -1,6 +1,6 @@
 'use client'
 
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, motion, Variants } from 'motion/react'
 import type React from 'react'
 import { useEffect, useRef, useState } from 'react'
 
@@ -42,7 +42,7 @@ export const AnimatedTextCycle: React.FC<AnimatedTextCycleProps> = ({
 	}, [interval, words.length])
 
 	// Container animation for the whole word
-	const containerVariants = {
+	const containerVariants: Variants = {
 		hidden: {
 			y: -10,
 			opacity: 0,
