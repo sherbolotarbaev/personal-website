@@ -1,3 +1,5 @@
+'use client'
+
 import type React from 'react'
 
 import type { PlaceholderValue } from 'next/dist/shared/lib/get-img-props'
