@@ -202,7 +202,7 @@ const Projects: React.FC = () => {
 				</AnimatePresence>
 			</div>
 
-			{hasMoreProjects && (
+			{hasMoreProjects && !showAll && (
 				<motion.div
 					className='mt-8 flex justify-center'
 					initial={{ opacity: 0, y: 20 }}
@@ -215,7 +215,7 @@ const Projects: React.FC = () => {
 						className='text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300'
 						onClick={() => setShowAll(!showAll)}
 					>
-						{showAll ? 'Show less..' : 'See more..'}
+						See more..
 					</Button>
 				</motion.div>
 			)}
