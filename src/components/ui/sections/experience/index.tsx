@@ -20,6 +20,9 @@ import {
 
 import { ChevronDown, ChevronUp } from 'lucide-react'
 
+import { cn } from 'utils'
+import HorizontalSlider from '../../horizontal-slider'
+
 const Work: React.FC = () => {
 	return (
 		<SectionWrapper>
@@ -66,35 +69,70 @@ const Experience: React.FC<TExperience> = ({
 		>
 			<div className='mb-3 cursor-pointer select-none' onClick={toggleExpanded}>
 				<div className='flex items-center justify-between'>
-					<div className='flex-1'>
-						{positions.length === 1 ? (
-							<h3 className='text-zinc-900 dark:text-zinc-50 font-[450] font-base text-[17px]'>
-								{positions[0].title}
-							</h3>
-						) : (
-							<LinkPreview url={url} className='text-[17px]'>
-								{company}
-							</LinkPreview>
-						)}
-
-						<div className='flex flex-col'>
-							{positions.length === 1 && (
-								<LinkPreview
-									url={url}
-									className='text-[14px] font-normal text-zinc-900 dark:text-zinc-400 max-w-fit'
-								>
+					<div className='flex flex-col gap-4'>
+						<div className='flex-1'>
+							{positions.length === 1 ? (
+								<h3 className='text-zinc-900 dark:text-zinc-50 font-[450] font-base text-[17px]'>
+									{positions[0].title}
+								</h3>
+							) : (
+								<LinkPreview url={url} className='text-[17px]'>
 									{company}
 								</LinkPreview>
 							)}
-							<span className='text-sm text-zinc-600 dark:text-zinc-400'>
-								{duration.startDate} - {duration.endDate}{' '}
-								{duration.totalDuration && `· ${duration.totalDuration}`}
-							</span>
-							<span className='text-sm text-zinc-600 dark:text-zinc-400'>
-								{location}{' '}
-								{type && ` · ${type.charAt(0).toUpperCase() + type.slice(1)}`}
-							</span>
+
+							<div className='flex flex-col'>
+								{positions.length === 1 && (
+									<LinkPreview
+										url={url}
+										className='text-[14px] font-normal text-zinc-900 dark:text-zinc-400 max-w-fit'
+									>
+										{company}
+									</LinkPreview>
+								)}
+								<span className='text-sm text-zinc-600 dark:text-zinc-400'>
+									{duration.startDate} - {duration.endDate}{' '}
+									{duration.totalDuration && `· ${duration.totalDuration}`}
+								</span>
+								<span className='text-sm text-zinc-600 dark:text-zinc-400'>
+									{location}{' '}
+									{type && ` · ${type.charAt(0).toUpperCase() + type.slice(1)}`}
+								</span>
+							</div>
 						</div>
+
+						{positions.length === 1 &&
+							positions[0].covers &&
+							positions[0].covers.length > 0 && (
+								<HorizontalSlider
+									items={positions[0].covers.map((cover, index) => (
+										<motion.div
+											key={index}
+											transition={{
+												duration: 0.3,
+												delay: 0.25,
+												ease: 'easeOut',
+											}}
+										>
+											<ImageThumbnail
+												src={cover}
+												alt={`${positions[0].title} - ${company}`}
+												images={positions[0].covers?.map((c, i) => ({
+													src: c,
+													alt: `${positions[0].title} - ${company} (cover ${
+														i + 1
+													})`,
+												}))}
+												initialIndex={index}
+												className={cn(
+													'shadow-lg rounded-xl w-38 sm:w-52',
+													positions[0].covers?.length === 1 && 'aspect-video'
+												)}
+											/>
+										</motion.div>
+									))}
+								/>
+							)}
 					</div>
 
 					{positions.length > 1 && (
@@ -234,23 +272,11 @@ const Experience: React.FC<TExperience> = ({
 											)}
 
 											{covers && covers.length > 0 && (
-												<motion.div
-													className='mt-4 flex flex-wrap gap-3'
-													initial={{ opacity: 0, y: 20 }}
-													animate={
-														isInView && isExpanded
-															? { opacity: 1, y: 0 }
-															: { opacity: 0, y: 20 }
-													}
-													transition={{
-														duration: 0.3,
-														delay: posIndex * 0.05 + 0.25,
-														ease: 'easeOut',
-													}}
-												>
-													{covers.map((cover, coverIndex) => (
+												<HorizontalSlider
+													className='mt-4'
+													items={covers.map((cover, index) => (
 														<motion.div
-															key={coverIndex}
+															key={index}
 															initial={{ opacity: 0, scale: 0.9 }}
 															animate={
 																isInView && isExpanded
@@ -259,21 +285,26 @@ const Experience: React.FC<TExperience> = ({
 															}
 															transition={{
 																duration: 0.2,
-																delay:
-																	posIndex * 0.05 + 0.3 + coverIndex * 0.05,
+																delay: posIndex * 0.05 + 0.3,
 																ease: 'easeOut',
 															}}
 														>
 															<ImageThumbnail
-																src={cover || '/placeholder.svg'}
-																alt={`${title} - ${company} (cover ${
-																	coverIndex + 1
-																})`}
-																className='md:max-w-72 shadow-lg'
+																src={cover}
+																alt={`${title} - ${company}`}
+																images={covers.map((c, i) => ({
+																	src: c,
+																	alt: `${title} - ${company} (cover ${i + 1})`,
+																}))}
+																initialIndex={index}
+																className={cn(
+																	'shadow-lg rounded-xl w-38 sm:w-52',
+																	covers.length === 1 && 'aspect-video'
+																)}
 															/>
 														</motion.div>
 													))}
-												</motion.div>
+												/>
 											)}
 
 											{skills && skills.length > 0 && (

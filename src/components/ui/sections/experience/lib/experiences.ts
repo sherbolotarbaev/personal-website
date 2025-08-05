@@ -42,6 +42,11 @@ export const experiences: TExperience[] = [
 					endDate: 'Present',
 				},
 				type: 'full-time',
+				covers: [
+					'/images/peopleup.png',
+					'/images/peopleup-2.png',
+					'/images/peopleup-3.png',
+				],
 			},
 		],
 	},
